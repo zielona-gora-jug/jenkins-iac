@@ -1,0 +1,26 @@
+jenkins:
+  systemMessage: "IaC Jenkins"
+  authorizationStrategy:
+    globalMatrix:
+      grantedPermissions:
+        - "Overall/Read:authenticated"
+        - "Job/Build:authenticated"
+        - "Job/Cancel:authenticated"
+        - "Job/Read:authenticated"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "${JENKINS_USER}"
+          password: "${JENKINS_PASS}"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "GITHUB"
+              username: "${JENKINS_USER}"
+              password: "${JENKINS_PASS}"
+              description: "Username/Password Credentials for Github" 

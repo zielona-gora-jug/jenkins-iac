@@ -1,0 +1,18 @@
+jobs:
+  - script: >
+       multibranchPipelineJob('jenkins-iac') {
+         branchSources {
+                   git {
+                       remote('https://github.com/zielona-gora-jug/jenkins-iac.git')
+                       credentialsId('GITHUB')
+                   }
+         }
+         orphanedItemStrategy {
+           discardOldItems {
+             numToKeep(5)
+           }
+         }
+         triggers {
+           periodic(5)
+         }
+       } 
