@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  jenkins:
+    build: .
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+      JENKINS_USER: "${JENKINS_USER}"
+      JENKINS_PASS: "${JENKINS_PASS}"
+      CASC_JENKINS_CONFIG: "/var/jenkins_home/casc_configs"
+    ports:
+     - "8080:8080"
+    volumes:
+     - "./jenkins_home:/var/jenkins_home"
+     - "./configuration:/var/jenkins_home/casc_configs"
